@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.automap import automap_base
+from flask_mail import Mail, Message
+import re
 
 app = Flask(__name__)
 
@@ -29,6 +31,18 @@ Pstatus = Base.classes.pstatus
 Schedule = Base.classes.schedule
 Ther = Base.classes.ther
 Admin = Base.classes.admin
+
+admin_email = db.session.query(Admin.EMAIL).all()
+admin_email_pass = db.session.query(Admin.EMAILPASS).all()
+
+
+app.config['MAIL_SERVER'] = 'smtp.office365.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = admin_email
+app.config['MAIL_PASSWORD'] = admin_email_pass
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
 
 @app.route('/')
 def index():
@@ -197,7 +211,45 @@ def patient():
 
 @app.route('/userUpdate', methods=['GET', 'POST'])
 def userUpdate():
-    return render_template('user_success.html')
+    message = ""
+    if request.method == 'POST':
+        email = request.form['email']
+        drugcode = request.form['drugcode']
+        codetype = request.form['codetype']
+        content = request.form['subject']
+        if email == '':
+            if drugcode == '' and content == '':
+                    message = "⚠️Please fill out all required field!"
+            elif drugcode != '' and content == '':
+                message = "⚠️Please fill out Email Address and Up-to-date Information!"
+            elif drugcode == '' and content != '':
+                message = "⚠️Please fill out Email Address and Drug Code!"
+            else:
+                message = "⚠️Please fill out Email Address!"
+        else:
+            if not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+                message = "⚠️Invalid email address!"
+            else:
+                if drugcode == '' and content == '':
+                    message = "⚠️Please fill out Drug Code and Up-to-date Information!"
+                elif drugcode != '' and content == '':
+                    message = "⚠️Please fill out Up-to-date Information!"
+                elif drugcode == '' and content != '':
+                    message = "⚠️Please fill out Drug Code!"
+                else:
+                    results = db.session.query(Admin.EMAIL).all()
+                    admin_email = results[0][0]
+                    title = "Update Request From User: " + email
+                    msg = Message(title, sender = email, recipients = [admin_email])
+                    msg.body = "You have received a new message. Here are the details:\n Requested update drugcode:  \n " + drugcode + "\nRequested update code type:" + codetype + "\n Detailed message:" + content +"\n"
+                    mail.send(msg)
+                    title1 = "Thank you for using PharmaSearch"
+                    msg1 = Message(title1, sender = admin_email, recipients = [email])
+                    msg1.body = "<html><h1>Hi, "+email+"</h1><p>Thank you for using PharmaSearch. We have received your request! We will contact to you soon!</p><p>Here is the copy of your submitted request:\n Requested update drugcode:  \n " + drugcode + "\nRequested update code type:" + codetype + "\n Detailed message:" + content +"\n</p>"
+                    mail.send(msg1)
+                    message = "We have received your request! We will contact to you soon!"
+    return render_template('user_success.html', message = message)
+        
 
 if __name__ == '__main__':
     app.run()

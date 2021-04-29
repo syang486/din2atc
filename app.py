@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request,session
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.automap import automap_base
 
@@ -57,27 +57,38 @@ def login():
         if 'username' in request.form and 'password' in request.form:
             username = request.form['username']
             password = request.form['password']
-            if db.session.query(Admin).filter(Admin.USERNAME == username).filter(Admin.PASSWORD == password).count() != 0:
-                session['loggedin'] = True
-                session['username'] = username
-                #result = db.session.query(Admin).filter(Admin.USERNAME == username).filter(Admin.PASSWORD == password).one()
-                #result.LOGGEDIN = "True"
-                #db.session.commit()
-            else:
+            if db.session.query(Admin).filter(Admin.USERNAME == username).filter(Admin.PASSWORD == password).count() == 0:
                 message = "Incorrect username/password!"
-    return render_template('admin_home.html', message = message)
+                return render_template('admin_login.html', message = message)
+    return render_template('admin_home.html', username = username)
 
-@app.route('/logout', methods=['GET', 'POST'])
+@app.route('/logout')
 def logout():
-    session.pop('loggedin', None)
-    session.pop('username', None)
     return render_template('index.html')
 
 @app.route('/adminHome')
-def admin_Home():
-    if 'loggedin' in session:
-        return render_template('admin_home.html', username = session['username'])
-    return render_template('admin_login.html')
+def adminHome():
+    username = db.session.query(Admin.USERNAME).one()
+    username = username[0]
+    return render_template('admin_home.html', username = username)
+
+@app.route('/adminProfile')
+def adminProfile():
+    users = db.session.query(Admin).all()
+    print(users)
+    return render_template('admin_profile.html', users = users)
+
+@app.route('/ViewData')
+def ViewData():
+    return render_template('view_data.html')
+
+@app.route('/ModifyData')
+def ModifyData():
+    return render_template('modify_data.html')
+
+@app.route('/ManageProfile')
+def ManageProfile():
+    return render_template('manage_profile.html')
 
 @app.route('/contact')
 def contact():
@@ -182,6 +193,11 @@ def patient():
             results_ingred = db.session.query(Drug.DRUG_CODE, Ingredient.INGREDIENT, Ingredient.STRENGTH).join(Drug, Drug.DRUG_CODE == Ingredient.DRUG_CODE).filter(Drug.BRAND_NAME == drug_name).distinct().all()
             return render_template('patient_result.html', results = results, results_ingred = results_ingred)
     return render_template('patient_result.html')
+
+
+@app.route('/userUpdate', methods=['GET', 'POST'])
+def userUpdate():
+    return render_template('user_success.html')
 
 if __name__ == '__main__':
     app.run()

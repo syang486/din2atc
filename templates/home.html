@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel = "stylesheet" href="../static/styles/index.css">
+    <link rel = "stylesheet" href="../static/styles/rightContainer.css">
+    <link rel = "stylesheet" href="../static/styles/icon.css">
+    <link rel = "stylesheet" href="../static/styles/form.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@500;700&family=Lobster&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"
+      integrity="sha512-IQLehpLoVS4fNzl7IfH8Iowfm5+RiMGtHykgZJl9AWMgqx0AmJ6cRWcB+GaGVtIsnC4voMfm8f2vwtY+6oPjpQ=="
+      crossorigin="anonymous"
+    ></script>
+    <script language="JavaScript"type="text/javascript"src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    
+</head>
+<body>
+
+  <main>
+      <div class="left-nav">
+        <ul class="nav">
+          <div class = "logo1" >
+            <img style="width: 400px;"src="../static/images/default.png" alt ="logo" href = "index.html">
+            <p class="logo_description">
+            New way of searching for medication. More efficient way to get accurate information.
+            </p>
+          </div>
+          <li><a class = 'active' href="{{url_for('home')}}" id = "home-btn" >Home</a></li>
+          <li><a href="{{url_for('search')}}" id = "search-btn"  >Search</a></li>
+          <li><a href="{{url_for('update')}}" id = "update-btn" >Update</a></li>
+          <li><a href="{{url_for('contact')}}" id = "contact-btn" >Contact</a></li>
+        </ul>
+      </div>
+  </main>
+
+
+  <div class="right-top-nav">
+      <ul class="nav-bar">
+        <li><a id="len1" class="hoverable" href="#About Us-content">About Us</a></li>
+        <li><a id="len2" class="hoverable" href="#Instructions-content">Instructions</a></li>
+      </ul>
+  </div>
+  <div style="margin-left:450px;">
+  <div id="content-container" style="margin-left:50px;">
+    <div class="body-content" id="About Us-content" >
+      <h>💊 PharmaSearch</h>
+      <p>   Faster conversion between DIN and ATC.</p>   
+      <p>   Accurate information and always up-to-date.</p>  
+      <img id="aboutus-pic" src="../static/images/aboutus.png" alt="aboutpage"/> 
+      <p>   Cover all groups of users.</p>
+      <p>   Active forum for latest articles and speeches.</p>   
+   </div>
+   <div class="body-content" id="Instructions-content">
+      <h>🔧 Guidance</h>
+      <p>Search Bar Includes:</p>
+      <p>   - Researcher: provide the information about medicine related to ATC, DIN, company's name, status and etc. 
+            Better used for people who need specific and detailed data. </p >
+      <p>   - Parmacist: provide the information about medicine related to the medical's name, company's name, the status on market, the dosage, and etc. 
+            Better used for people who work at the pharmacy.</p >
+      <p>   - Individual: provide the information about medicine related to the medical's name, the function of medicine, the dosage, and cautions. 
+            Better used for people who buy the medicine from the grocery stores.  </p >
+   </div>
+  </div>
+</div>
+</body>
+
+<script>
+  $('.nav a').click(function(){
+    $('.nav a').removeClass('active');
+    $(this).addClass('active');
+  })
+</script>
+</html>

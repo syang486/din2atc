@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel = "stylesheet" href="../static/styles/index.css">
+    <link rel = "stylesheet" href="../static/styles/rightContainer.css">
+    <link rel = "stylesheet" href="../static/styles/icon.css">
+    <link rel = "stylesheet" href="../static/styles/form.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@500;700&family=Lobster&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"
+      integrity="sha512-IQLehpLoVS4fNzl7IfH8Iowfm5+RiMGtHykgZJl9AWMgqx0AmJ6cRWcB+GaGVtIsnC4voMfm8f2vwtY+6oPjpQ=="
+      crossorigin="anonymous"
+    ></script>
+    <script language="JavaScript"type="text/javascript"src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    
+</head>
+<body>
+  <div class="intro">
+    <div class="intro-text">
+      <h1 class="hide">
+        <span class="text">Accurate</span>
+      </h1>
+      <h1 class="hide">
+        <span class="text">Efficient</span>
+      </h1>
+      <h1 class="hide">
+        <span class="text">For Everyone.</span>
+      </h1>
+    </div>
+  </div>
+  <div class="slider"></div>
+  
+  <main>
+    <section class='landing'>
+      <div class="left-nav">
+        <ul class="nav">
+          <div class = "logo1" >
+            <img style="width: 400px;"src="../static/images/default.png" alt ="logo" href = "index.html">
+            <p class="logo_description">
+            New way of searching for medication. More efficient way to get accurate information.
+            </p>
+          </div>
+          <li><a class = 'active' href="{{url_for('home')}}" id = "home-btn" >Home</a></li>
+          <li><a href="{{url_for('search')}}" id = "search-btn"  >Search</a></li>
+          <li><a href="{{url_for('update')}}" id = "update-btn" >Update</a></li>
+          <li><a href="{{url_for('contact')}}" id = "contact-btn" >Contact</a></li>
+        </ul>
+      </div>
+
+      <div id="right-container">
+        <div id="slogan" >
+          <img id="default-pic"src="../static/images/defaulpage.jpg" alt="mainpage">
+        </div>
+      </div>
+        
+  
+    </section>
+  </main>
+
+
+</body>
+<script src = "../static/js/opening.js"></script>
+<script>
+  $('.nav a').click(function(){
+    $('.nav a').removeClass('active');
+    $(this).addClass('active');
+  })
+</script>
+</html>

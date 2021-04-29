@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel = "stylesheet" href="../static/styles/index.css">
+    <link rel = "stylesheet" href="../static/styles/rightContainer.css">
+    <link rel = "stylesheet" href="../static/styles/icon.css">
+    <link rel = "stylesheet" href="../static/styles/form.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@500;700&family=Lobster&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"
+      integrity="sha512-IQLehpLoVS4fNzl7IfH8Iowfm5+RiMGtHykgZJl9AWMgqx0AmJ6cRWcB+GaGVtIsnC4voMfm8f2vwtY+6oPjpQ=="
+      crossorigin="anonymous"
+    ></script>
+    <script language="JavaScript"type="text/javascript"src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+</head>
+<body>
+
+  <main>
+      <div class="left-nav">
+        <ul class="nav">
+          <div class = "logo1" >
+            <img style="width: 400px;"src="../static/images/default.png" alt ="logo" href = "index.html">
+            <p class="logo_description">
+            New way of searching for medication. More efficient way to get accurate information.
+            </p>
+          </div>
+          <li><a href="{{url_for('home')}}" id = "home-btn" >Home</a></li>
+          <li><a class = 'active' href="{{url_for('search')}}" id = "search-btn"  >Search</a></li>
+          <li><a href="{{url_for('update')}}" id = "update-btn" >Update</a></li>
+          <li><a href="{{url_for('contact')}}" id = "contact-btn" >Contact</a></li>
+        </ul>
+      </div>
+  </main>
+
+
+  <div class="right-top-nav">
+      <ul class="nav-bar">
+        <li><a id="len1" class="hoverable" href="#Researcher-content">Researcher</a></li>
+        <li><a id="len2" class="hoverable" href="#Pharmacist-content">Pharmacist</a></li>
+        <li><a id="len3" class="hoverable" href="#Patient-content">Patient</a></li>
+      </ul>
+  </div>
+  <div style="margin-left:450px;">
+  <div id="content-container" style="margin-left:50px;">
+    <div class="body-content" id="Researcher-content">
+   <img id="update-pic" src="../static/images/search.jpg" alt="update">
+   <h>🔎  Hi Researchers!</h>
+   <div class="login-box">
+   <form action="{{url_for('researcher')}}" method="post">
+      <div class="user-box">
+         <input type="text" name="researcher-din" id="researcher-din" placeholder="DIN Code">
+         <label style="font-size:15px; font-weight:bold;">DIN</label>
+      </div>
+      <div class="user-box">
+         <input type="text" name="researcher-atc" id="researcher-din" placeholder="ATC Code">
+         <label style="font-size:15px; font-weight:bold;">ATC</label>
+      </div>
+   <span></span>
+   <span></span>
+	<input type="submit" name="converse" value="Converse">
+   </form>
+   </div>
+
+   
+</div>
+
+<div class="body-content" id="Pharmacist-content">
+   <img id="update-pic" src="../static/images/search2.jpg" alt="update">
+   <h>🔎  Hi Pharmacists!</h>
+   <div class="login-box">
+   <form action="{{url_for('pharmacist')}}" method="post">
+      <div class="user-box">
+         <input type="text" name="pharmacist-drug_name">
+         <label style="font-size:15px; font-weight:bold;">Drug Name</label>
+      </div>
+      <div class="user-box">
+         <input type="text" name="pharmacist-din_atc">
+         <label style="font-size:15px; font-weight:bold;">DIN or ATC Code</label>
+      </div>
+   <span></span>
+   <span></span>
+	<input type="submit" name="search" value="Search">
+   </form>
+   
+   </div>
+
+</div>
+
+<div class="body-content" id="Patient-content">
+   <img id="update-pic" src="../static/images/search3.jpg" alt="update">
+   <h>🔎  Hi Patients!</h>
+   <div class="login-box">
+   <form action="{{url_for('patient')}}" method="post">
+      <div class="user-box">
+         <input type="text" name="patinet-drug_name">
+         <label style="font-size:15px; font-weight:bold;">Drug Name</label>
+      </div>
+      <span></span>
+      <span></span>
+      <input type="submit" name="search" value="Search">
+   </form>
+   </div>
+</div>
+  </div>
+</div>
+</body>
+
+<script>
+  $('.nav a').click(function(){
+    $('.nav a').removeClass('active');
+    $(this).addClass('active');
+  })
+</script>
+</html>

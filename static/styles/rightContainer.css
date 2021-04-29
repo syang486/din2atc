@@ -1,0 +1,220 @@
+.landing #right-container{
+    margin-left:35%; 
+
+}
+.hoverable{
+    display:inline-block;
+    backface-visibility: hidden;
+    vertical-align: middle;
+    position:relative;
+    box-shadow: 0 0 1px rgba(0,0,0,0);
+    transform: translateZ(0);
+    transition-duration: .3s;
+    transition-property:transform;
+  }
+  
+  .hoverable:before{
+    position:absolute;
+    pointer-events: none;
+    z-index:-1;
+    content: '';
+    top: 100%;
+    left: 5%;
+    height:10px;
+    width:90%;
+    opacity:0;
+    background: -webkit-radial-gradient(center, ellipse, rrgba(211, 211, 209, 0.767) 0%, rgb(253, 253, 255) 20%);
+    background: radial-gradient(ellipse at center, rgba(211, 211, 209, 0.767) 0%, rgb(253, 253, 255) 60%);
+    /* W3C */
+    transition-duration: 0.3s;
+    transition-property: transform, opacity;
+  }
+  
+  .hoverable:hover, .hoverable:active, .hoverable:focus{
+    transform: translateY(-5px);
+  }
+  .hoverable:hover:before, .hoverable:active:before, .hoverable:focus:before{
+    opacity: 1;
+    transform: translateY(-5px);
+  }
+  
+  
+  
+  @keyframes bounce-animation {
+    16.65% {
+      -webkit-transform: translateY(8px);
+      transform: translateY(8px);
+    }
+  
+    33.3% {
+      -webkit-transform: translateY(-6px);
+      transform: translateY(-6px);
+    }
+  
+    49.95% {
+      -webkit-transform: translateY(4px);
+      transform: translateY(4px);
+    }
+  
+    66.6% {
+      -webkit-transform: translateY(-2px);
+      transform: translateY(-2px);
+    }
+  
+    83.25% {
+      -webkit-transform: translateY(1px);
+      transform: translateY(1px);
+    }
+  
+    100% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+  }
+  
+  .bounce {
+    animation-name: bounce-animation;
+    animation-duration: 2s;
+  }
+  
+  
+  
+  /*everything below here is just setting up the page, so dont worry about it */
+  
+  
+  @media (min-width: 768px) {
+    .right-top-nav{
+      text-align: left !important;
+      float: none;
+      position: fixed;
+      display: inline-block;
+      margin-left: 450px;
+      background-color: white;
+      top: 0;
+    }
+  }
+  
+
+  
+.right-top-nav ul {
+    background: none !important;
+    background-color: white;
+    width: 800px;
+    position:sticky;
+    list-style-type: none;
+  }
+  .right-top-nav  li {
+      padding:14px 16px;
+      float: left;
+  }
+.right-top-nav a{
+        transition: .5s color ease-in-out;
+        font-family: 'Comfortaa', cursive;
+        font-size: 18px;
+        text-decoration: none;
+        color: gray;
+      }
+    
+  
+#content-container{
+    height:1000px;
+    
+}
+
+.body-content{
+  padding-top:10%;
+  height:1000px;
+ 
+}
+
+#right-container h {
+  font-family: 'Spartan', sans-serif;
+  font-size: 40px;
+  color: rgba(22, 22, 22, 0.877);
+  transform: translateY(100px);
+  animation: slideUp 1.5s ease-in-out forwards;
+}
+
+
+#right-container h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 35px;
+  line-height: 150%;
+  padding-top: 10%;
+  color: rgba(22, 22, 22, 0.877);
+  animation: slideUp 1.5s ease-in-out forwards;
+}
+
+#right-container p{
+  font-family: 'Montserrat', sans-serif;
+  line-height: 150%;
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  animation: slideUp 1.5s ease-in-out forwards;
+
+}
+
+
+#default-pic{
+  width:650px; 
+  float:right;
+  margin-top:0%;
+  transform: translateY(100px);
+  animation: slideIn 3.0s ease-in-out forwards;
+}
+
+#contact-pic{
+  width:650px; 
+  float: inline-end;
+  margin-top:0%;
+  margin-left:0% ;
+  transform: translateY(100px);
+  animation: slideIn 1.0s ease-in-out forwards;
+}
+
+#update-pic{
+  position: relative;
+  width:500px; 
+  float:right;
+  margin-top:10%;
+  transform: translateY(100px);
+ 
+  animation: slideIn 2.0s ease-in-out forwards;
+}
+
+#aboutus-pic{
+  width:600px; 
+  float:right;
+  transform: translateY(100px);
+  animation: slideIn 2.0s ease-in-out forwards;
+
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(500px) scale(.2);
+  }
+  100% {
+    transform: translateX(0px) scale(1);
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(300px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes expand {
+  0% {
+    transform: translateX(1400px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+  

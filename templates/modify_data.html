@@ -4,6 +4,8 @@
 		<meta charset="utf-8">
 		<link rel = "stylesheet" href="../static/styles/admin.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100&display=swap" rel="stylesheet">
 	</head>
 	<body class="loggedin">
 		<nav class="navtop">
@@ -16,8 +18,105 @@
 		</nav>
 		<div class="content">
             <h2>Modify Data Page</h2>
-            <p>input form</p>
+			{% if message %}
+      			<p class="message">{{ message | safe }}</p>
+    		{% endif %}
+    		<br>
+            <form method="post" action="{{url_for('ModifyData')}}" method = "post">
+			<div class="wrapper">
+      			<h3>Company Table</h3>
+      			<div class="search-container">
+				  	<label for="company_table">Company Code	&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; Company Name</label><br>
+        			<input type="text" id="company_code" name="company_code" placeholder="Company Code">
+        			<input type="text" id="company_name" name="company_name" placeholder="Company Name">
+      			</div>
+    		</div>
+			<br>
+			<div class="wrapper">
+      			<h3>Drug Table</h3>
+      			<div class="search-container">
+				  	<label for="drug_table">Product Categorization &emsp;&emsp;&nbsp;Class &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;DIN Code	</label><br>
+        			<input type="text" id="drug_product_categorization" name="drug_product_categorization" placeholder="Product Categorization">
+        			<input type="text" id="drug_class" name="drug_class" placeholder="Class">
+					<input type="text" id="drug_din_code" name="drug_din_code" placeholder="DIN Code">
+					<br>
+					<label for="drug_table">Brand Name&ensp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;Descriptor &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Last Update Date</label><br>
+					<input type="text" id="drug_brand_name" name="drug_brand_name" placeholder="Brand Name">
+					<input type="text" id="drug_descriptor" name="drug_descriptor" placeholder="Descriptor">
+					<input type="text" id="drug_last_update_date" name="drug_last_update_date" placeholder="Last Update Date">
+      			</div>
+    		</div>
+			<br>
+			<div class="wrapper">
+      			<h3>Ingredient Table</h3>
+      			<div class="search-container">
+				  	<label for="ingred_table">Ingredient&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Strength &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;Strength Unit</label><br>
+        			<input type="text" id="ingred_ingredient" name="ingred_ingredient" placeholder="Ingredient">
+        			<input type="text" id="ingred_strength" name="ingred_strength" placeholder="Strength">
+					<input type="text" id="ingred_strength_unit" name="ingred_strength_unit" placeholder="Strength Unit">
+      			</div>
+    		</div>
+			<br>
+			<div class="wrapper">
+      			<h3>Package Table</h3>
+      			<div class="search-container">
+				  	<label for="package_table">Product Information</label><br>
+        			<input type="text" id="package_product_information" name="package_product_information" placeholder="Product Information">
+      			</div>
+    		</div>
+			<br>
+			<div class="wrapper">
+      			<h3>Pharm Table</h3>
+      			<div class="search-container">
+				  	<label for="pharm_table">Pharmaceutical Form</label><br>
+        			<input type="text" id="pharm_pharmaceutical_form" name="pharm_pharmaceutical_form" placeholder="Pharmaceutical Form">
+      			</div>
+    		</div>
+			<br>
+			<div class="wrapper">
+      			<h3>Route Table</h3>
+      			<div class="search-container">
+				  	<label for="route_table">Route of Administration</label><br>
+        			<input type="text" id="route_route_of_administration" name="route_route_of_administration" placeholder="Route of Administration">
+      			</div>
+    		</div>
+			<br>
+			<div class="wrapper">
+      			<h3>Status Table</h3>
+      			<div class="search-container">
+				  	<label for="status_table">Current Status Flag &emsp;&emsp;&emsp;&emsp; Status &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; History Date</label><br>
+        			<input type="text" id="status_current_status_flag" name="status_current_status_flag" placeholder="Current Status Flag">
+					<input type="text" id="status_status" name="status_status" placeholder="Status">
+					<input type="text" id="status_history_date" name="status_history_date" placeholder="History Date">
+      			</div>
+    		</div>
+			<br>
+			<div class="wrapper">
+      			<h3>Schedule Table</h3>
+      			<div class="search-container">
+				  	<label for="schedule_table">Schedule</label><br>
+        			<input type="text" id="schedule_schedule" name="schedule_schedule" placeholder="Schedule">
+      			</div>
+    		</div>
+			<br>
+			<div class="wrapper">
+      			<h3>Ther Table</h3>
+      			<div class="search-container">
+				  	<label for="ther_table">TC_ATC Code &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;TC_ATC&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; TC_AHFS Number&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp; TC_AHFS</label><br>
+        			<input type="text" id="ther_tc_atc_code" name="ther_tc_atc_code" placeholder="TC_ATC Code">
+					<input type="text" id="ther_tc_atc" name="ther_tc_atc" placeholder="TC_ATC">
+					<input type="text" id="ther_tc_ahfs_number" name="ther_tc_ahfs_number" placeholder="TC_AHFS Number">
+					<input type="text" id="ther_tc_ahfs" name="ther_tc_ahfs" placeholder="TC_AHFS">
+      			</div>
+    		</div>
+			<br>
+			<br>
+    		<div class="row">
+      			<input type="submit" value="Update">
+    		</div>
+  			</form>
 		</div>
-
+		<br>
+		<br>
 	</body>
 </html>

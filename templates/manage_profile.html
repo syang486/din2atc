@@ -16,8 +16,31 @@
 		</nav>
 		<div class="content">
             <h2>Manage Profile Page</h2>
-            <p>input form</p>
+            <form method="post" action="{{url_for('adminUpdate')}}" method = "post">
+       		 	<label for="admin-username">Username</label>
+      			<div class="col-75">
+        			<input type="text" id="username" name="username" placeholder="Admin Username">
+      			</div>
+				<br>
+        		<label for="admin-password">Password</label>
+      			<div class="col-75">
+        			<input type="text" id="password" name="password" placeholder="Admin Password">
+      			</div>
+				<br>
+				<label for="admin-email">Email Address</label>
+				<div class="col-75">
+      				<input type="text" id="email" name="email" placeholder="Admin Email">
+      			</div>
+				<br>
+				<label for="admin-email-password">Email Password</label>
+      			<div class="col-75">
+        			<input type="text" id="emailpass" name="emailpass" placeholder="Admin Email Password">
+      			</div>
+				<br>
+				<br>
+				<br>
+      			<input type="submit" value="Update">
+  			</form>
 		</div>
-
 	</body>
 </html>

@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.automap import automap_base
 from flask_mail import Mail, Message
+import smtplib
 import re
 
 app = Flask(__name__)
@@ -36,11 +37,11 @@ admin_email = db.session.query(Admin.EMAIL).all()
 admin_email_pass = db.session.query(Admin.EMAILPASS).all()
 
 
-app.config['MAIL_SERVER'] = 'smtp.office365.com'
-app.config['MAIL_PORT'] = 465
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
 app.config['MAIL_USERNAME'] = admin_email
 app.config['MAIL_PASSWORD'] = admin_email_pass
-app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
 
@@ -89,16 +90,18 @@ def adminHome():
 @app.route('/adminProfile')
 def adminProfile():
     users = db.session.query(Admin).all()
-    print(users)
     return render_template('admin_profile.html', users = users)
 
 @app.route('/ViewData')
 def ViewData():
-    return render_template('view_data.html')
+    return render_template('view_data.html', message="One of Brand Name or DIN Code or TC_ATC Code is required!")
 
-@app.route('/ModifyData')
+@app.route('/ModifyData', methods=['GET','POST'])
 def ModifyData():
-    return render_template('modify_data.html')
+    message = "One of Brand Name or DIN Code or TC_ATC Code is required!"
+    if request.method == 'POST':
+        message = "success!"
+    return render_template('modify_data.html', message=message)
 
 @app.route('/ManageProfile')
 def ManageProfile():
@@ -239,17 +242,52 @@ def userUpdate():
                 else:
                     results = db.session.query(Admin.EMAIL).all()
                     admin_email = results[0][0]
-                    title = "Update Request From User: " + email
-                    msg = Message(title, sender = email, recipients = [admin_email])
-                    msg.body = "You have received a new message. Here are the details:\n Requested update drugcode:  \n " + drugcode + "\nRequested update code type:" + codetype + "\n Detailed message:" + content +"\n"
-                    mail.send(msg)
-                    title1 = "Thank you for using PharmaSearch"
-                    msg1 = Message(title1, sender = admin_email, recipients = [email])
-                    msg1.body = "<html><h1>Hi, "+email+"</h1><p>Thank you for using PharmaSearch. We have received your request! We will contact to you soon!</p><p>Here is the copy of your submitted request:\n Requested update drugcode:  \n " + drugcode + "\nRequested update code type:" + codetype + "\n Detailed message:" + content +"\n</p>"
-                    mail.send(msg1)
-                    message = "We have received your request! We will contact to you soon!"
+                    results_pass = db.session.query(Admin.EMAILPASS).all()
+                    admin_email_pass = results_pass[0][0]
+                    # title = "Update Request From User: " + email
+                    # msg = Message(title, sender = email, recipients = [admin_email])
+                    # msg.body = "You have received a new message. Here are the details:\n Requested update drugcode:  \n " + drugcode + "\nRequested update code type:" + codetype + "\n Detailed message:" + content +"\n"
+                    # mail.send(msg)
+                    # title1 = "Thank you for using PharmaSearch"
+                    # msg1 = Message(title1, sender = admin_email, recipients = [email])
+                    # msg1.body = "<html><h1>Hi, "+email+"</h1><p>Thank you for using PharmaSearch. We have received your request! We will contact to you soon!</p><p>Here is the copy of your submitted request:\n Requested update drugcode:  \n " + drugcode + "\nRequested update code type:" + codetype + "\n Detailed message:" + content +"\n</p>"
+                    # mail.send(msg1)
+                    # message = "We have received your request! We will contact to you soon!"
+                    new_msg = "Email: " + email + "\n" + "Drug code: " + drugcode + "\n" + "Code type: " + codetype + "\n" + "Content: " + content + "\n"
+                    server = smtplib.SMTP("smtp.gmail.com")
+                    server.starttls()
+                    server.login(admin_email, admin_email_pass)
+                    server.sendmail(admin_email, admin_email, new_msg)
+                    message = "success!"
     return render_template('user_success.html', message = message)
         
+@app.route('/adminUpdate', methods=['POST', 'GET'])
+def adminUpdate():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        email = request.form['email']
+        emailpass = request.form['emailpass']
+        users = db.session.query(Admin).filter(Admin.ID == 1).one()
+        if username != '':
+            users.USERNAME = username
+            db.session.commit()
+        if password != '':
+            users.PASSWORD = password
+            db.session.commit()
+        if email != '':
+            users.EMAIL = email
+            db.session.commit()
+        if emailpass != '':
+            users.EMAILPASS = emailpass
+            db.session.commit()
+    users = db.session.query(Admin).one()
+    return redirect(url_for('adminProfile'))
+
+@app.route('/searchData', methods=['GET', 'POST'])
+def searchData():
+    return render_template('view_result.html')
+
 
 if __name__ == '__main__':
     app.run()

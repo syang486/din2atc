@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.automap import automap_base
-from flask_mail import Mail, Message
 import smtplib
 import re
 
@@ -31,19 +30,6 @@ Proute = Base.classes.proute
 Pstatus = Base.classes.pstatus
 Schedule = Base.classes.schedule
 Ther = Base.classes.ther
-Admin = Base.classes.admin
-
-admin_email = db.session.query(Admin.EMAIL).all()
-admin_email_pass = db.session.query(Admin.EMAILPASS).all()
-
-
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USERNAME'] = admin_email
-app.config['MAIL_PASSWORD'] = admin_email_pass
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USE_SSL'] = True
-mail = Mail(app)
 
 @app.route('/')
 def index():
@@ -60,52 +46,6 @@ def search():
 @app.route('/update')
 def update():
     return render_template('update.html')
-
-@app.route('/adminLogin')
-def adminLogin():
-    return render_template('admin_login.html')
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    message = ""
-    if request.method == 'POST':
-        if 'username' in request.form and 'password' in request.form:
-            username = request.form['username']
-            password = request.form['password']
-            if db.session.query(Admin).filter(Admin.USERNAME == username).filter(Admin.PASSWORD == password).count() == 0:
-                message = "Incorrect username/password!"
-                return render_template('admin_login.html', message = message)
-    return render_template('admin_home.html', username = username)
-
-@app.route('/logout')
-def logout():
-    return render_template('index.html')
-
-@app.route('/adminHome')
-def adminHome():
-    username = db.session.query(Admin.USERNAME).one()
-    username = username[0]
-    return render_template('admin_home.html', username = username)
-
-@app.route('/adminProfile')
-def adminProfile():
-    users = db.session.query(Admin).all()
-    return render_template('admin_profile.html', users = users)
-
-@app.route('/ViewData')
-def ViewData():
-    return render_template('view_data.html', message="One of Brand Name or DIN Code or TC_ATC Code is required!")
-
-@app.route('/ModifyData', methods=['GET','POST'])
-def ModifyData():
-    message = "One of Brand Name or DIN Code or TC_ATC Code is required!"
-    if request.method == 'POST':
-        message = "success!"
-    return render_template('modify_data.html', message=message)
-
-@app.route('/ManageProfile')
-def ManageProfile():
-    return render_template('manage_profile.html')
 
 @app.route('/contact')
 def contact():
@@ -240,54 +180,30 @@ def userUpdate():
                 elif drugcode == '' and content != '':
                     message = "⚠️Please fill out Drug Code!"
                 else:
-                    results = db.session.query(Admin.EMAIL).all()
-                    admin_email = results[0][0]
-                    results_pass = db.session.query(Admin.EMAILPASS).all()
-                    admin_email_pass = results_pass[0][0]
-                    # title = "Update Request From User: " + email
-                    # msg = Message(title, sender = email, recipients = [admin_email])
-                    # msg.body = "You have received a new message. Here are the details:\n Requested update drugcode:  \n " + drugcode + "\nRequested update code type:" + codetype + "\n Detailed message:" + content +"\n"
-                    # mail.send(msg)
-                    # title1 = "Thank you for using PharmaSearch"
-                    # msg1 = Message(title1, sender = admin_email, recipients = [email])
-                    # msg1.body = "<html><h1>Hi, "+email+"</h1><p>Thank you for using PharmaSearch. We have received your request! We will contact to you soon!</p><p>Here is the copy of your submitted request:\n Requested update drugcode:  \n " + drugcode + "\nRequested update code type:" + codetype + "\n Detailed message:" + content +"\n</p>"
-                    # mail.send(msg1)
-                    # message = "We have received your request! We will contact to you soon!"
-                    new_msg = "Email: " + email + "\n" + "Drug code: " + drugcode + "\n" + "Code type: " + codetype + "\n" + "Content: " + content + "\n"
-                    server = smtplib.SMTP("smtp.gmail.com")
-                    server.starttls()
-                    server.login(admin_email, admin_email_pass)
-                    server.sendmail(admin_email, admin_email, new_msg)
-                    message = "success!"
+                    admin_email = "pharmasearchuwo@gmail.com"
+                    admin_email_pass = "PharmaSearch2021"
+                    #new_msg = """Subject: Update Info From User: 
+                    #yes
+                    #"""
+                    
+                    try:
+                        email_p ="Title:Update Info From User: "
+                        newdetail="You have received a new message. Here are the details:"
+                        drugcode_p="Requested update Drug Code: "
+                        codetype_p="Requested update Code Type: "
+                        conent_p="Detailed Message:"
+                        new_msg = "\n"+email_p+email+"\n\n"+newdetail+"\n\n"+drugcode_p+drugcode+"\n\n"+codetype_p+codetype+"\n\n"+conent_p+"\n"+content
+                        server = smtplib.SMTP('smtp.gmail.com', 587)
+                        server.starttls()
+                        server.login(admin_email, admin_email_pass)
+                        server.sendmail(admin_email, admin_email, new_msg)
+                        server.quit()
+                        message = "We have received your request! We will contact to you soon!"
+                        return render_template('user_success.html', message = message)
+                    except:
+                        message = "Error: unable to send the email"
+                        return render_template('user_success.html', message = message)
     return render_template('user_success.html', message = message)
-        
-@app.route('/adminUpdate', methods=['POST', 'GET'])
-def adminUpdate():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        email = request.form['email']
-        emailpass = request.form['emailpass']
-        users = db.session.query(Admin).filter(Admin.ID == 1).one()
-        if username != '':
-            users.USERNAME = username
-            db.session.commit()
-        if password != '':
-            users.PASSWORD = password
-            db.session.commit()
-        if email != '':
-            users.EMAIL = email
-            db.session.commit()
-        if emailpass != '':
-            users.EMAILPASS = emailpass
-            db.session.commit()
-    users = db.session.query(Admin).one()
-    return redirect(url_for('adminProfile'))
-
-@app.route('/searchData', methods=['GET', 'POST'])
-def searchData():
-    return render_template('view_result.html')
-
 
 if __name__ == '__main__':
     app.run()

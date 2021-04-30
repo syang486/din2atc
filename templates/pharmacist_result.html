@@ -6,42 +6,47 @@
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100&display=swap" rel="stylesheet">
 </head>
 <body>
-
-<div id="resultcontainer">
-    <h1>Search Result:</h1>
-    <ol>
-    {% if message %}
-      <p class="message">{{ message | safe }}</p>
-    {% endif %}
-    <br>
-    {% if results %}
-        {% for result in results%}
-            <li>
-            <p>Drug Name: {{result[1]}}</p>
-            <p>DIN Code: {{result[2]}}</p>
-            <p>ATC Code: {{result[3]}}</p>
-            <p>Company Name: {{result[4]}}</p>
-            <p>Pharmaceutical Form: {{result[5]}}</p>
-            <p>Product Information: {{result[6]}}</p>
-            <p>Class: {{result[7]}}</p>
-            <p>Schedule: {{result[8]}}</p>
-            <p>Ingredient: </p>
-            <ol>
-            {% for result_ingred in results_ingred%}
-                {% if result[0] == result_ingred[0]%}
+<div id="resultpage">
+    <div id="resultcontainer">
+        <h1>Search Result:</h1>
+        <ol>
+        {% if message %}
+        <p class="message">{{ message | safe }}</p>
+        {% endif %}
+        <br>
+        {% if results %}
+            {% for result in results%}
                 <li>
-                <p>{{result_ingred[1]}}&nbsp&nbsp&nbsp{{result_ingred[2]}}</p>
+                <p>Drug Name: {{result[1]}}</p>
+                <p>DIN Code: {{result[2]}}</p>
+                <p>ATC Code: {{result[3]}}</p>
+                <p>Company Name: {{result[4]}}</p>
+                <p>Pharmaceutical Form: {{result[5]}}</p>
+                <p>Product Information: {{result[6]}}</p>
+                <p>Class: {{result[7]}}</p>
+                <p>Schedule: {{result[8]}}</p>
+                <p>Ingredient: </p>
+                <ol>
+                {% for result_ingred in results_ingred%}
+                    {% if result[0] == result_ingred[0]%}
+                    <li>
+                    <p>{{result_ingred[1]}}&nbsp&nbsp&nbsp{{result_ingred[2]}}</p>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+                <br>
+                </ol>
                 </li>
-                {% endif %}
             {% endfor %}
-            <br>
-            </ol>
-            </li>
-        {% endfor %}
-    {% endif %}
-    </ol>
+        {% endif %}
+        </ol>
+    </div>
+    <div id="result-img">
+        <img src="../static/images/reuslt.jpg">
+    </div>
 </div>
 <br>
+
 <a href="/search#Pharmacist-content">Back to Search Page</a>
 </body>
 </html>

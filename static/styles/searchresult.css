@@ -29,3 +29,12 @@ body{
 #resultcontainer{
     margin-left: 10%;
 }
+
+#resultpage{
+    display: flex;
+    flex-direction: row;
+}
+#result-img{
+    margin-left: auto;
+    margin-top: auto;
+}

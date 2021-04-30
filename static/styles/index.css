@@ -3,7 +3,7 @@ body {
   }
 
 .left-nav .logo1{
-    font-family:  'Montserrat', sans-serif;
+  font-family: 'Raleway', sans-serif;
     font-size: 60px;
     margin-top: 5%;
     color: rgba(83, 82, 82, 0.872);
@@ -13,7 +13,7 @@ body {
 
 }  
 .left-nav .logo_description{
-    font-family:  'Montserrat', sans-serif;
+  font-family: 'Raleway', sans-serif;
     font-size: 18px;
     margin-left: 20%;
     margin-right: 3%;
@@ -35,7 +35,7 @@ body {
   }
   
 .left-nav li a {
-    font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif;
     font-size: 50px;
     display: block;
     height: 77px;

@@ -15,7 +15,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@500;700&family=Lobster&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@100&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"
@@ -54,27 +55,30 @@
   </div>
   <div style="margin-left:450px;">
   <div id="content-container" style="margin-left:50px;">
-    <div class="body-content" id="Researcher-content">
-   <img id="update-pic" src="../static/images/search.jpg" alt="update">
-   <h>🔎  Hi Researchers!</h>
-   <div class="login-box">
-   <form action="{{url_for('researcher')}}" method="post">
-      <div class="user-box">
-         <input type="text" name="researcher-din" id="researcher-din" placeholder="DIN Code">
-         <label style="font-size:15px; font-weight:bold;">DIN</label>
+   <div class="body-content" id="Researcher-content">
+      <img id="update-pic" src="../static/images/search.jpg" alt="update">
+      <h>🔎  Hi Researchers!</h>
+      <div class="login-box">
+      <form action="{{url_for('researcher')}}" method="post">
+         <div class="user-box">
+            <input type="text" name="researcher-din" id="researcher-din"  >
+            <label style="font-size:15px; font-weight:bold;">DIN</label>
+         </div>
+         <div class="user-box">
+            <input type="text" name="researcher-atc" id="researcher-din" >
+            <label style="font-size:15px; font-weight:bold;">ATC</label>
+         </div>
+      <span></span>
+      <span></span>
+      <input type="submit" name="converse" value="Converse">
+      </form>
+      
       </div>
-      <div class="user-box">
-         <input type="text" name="researcher-atc" id="researcher-din" placeholder="ATC Code">
-         <label style="font-size:15px; font-weight:bold;">ATC</label>
-      </div>
-   <span></span>
-   <span></span>
-	<input type="submit" name="converse" value="Converse">
-   </form>
+      <br><br><br><br><br><br><br><br><br>
+        <p style="font-family:'Comfortaa', sans-serif;font-size: 5px;color:gray;margin-top:50%;">This website is created primarily for Canadian researchers, health professionals and students to aid in conversion of Drug Identification Numbers (DIN) to Anatomical Therapeutic Chemical classification codes (ATC) and vice versa.</p>
+      
+      
    </div>
-
-   
-</div>
 
 <div class="body-content" id="Pharmacist-content">
    <img id="update-pic" src="../static/images/search2.jpg" alt="update">
@@ -95,6 +99,8 @@
    </form>
    
    </div>
+   <br><br><br><br><br><br><br><br><br>
+        <p style="font-family:'Comfortaa', sans-serif;font-size: 5px;color:gray;margin-top:50%;">This website is created primarily for Canadian researchers, health professionals and students to aid in conversion of Drug Identification Numbers (DIN) to Anatomical Therapeutic Chemical classification codes (ATC) and vice versa.</p>
 
 </div>
 
@@ -112,6 +118,8 @@
       <input type="submit" name="search" value="Search">
    </form>
    </div>
+   <br><br><br><br><br><br><br><br><br>
+        <p style="font-family:'Comfortaa', sans-serif;font-size: 5px;color:gray;margin-top:50%;">This website is created primarily for Canadian researchers, health professionals and students to aid in conversion of Drug Identification Numbers (DIN) to Anatomical Therapeutic Chemical classification codes (ATC) and vice versa.</p>
 </div>
   </div>
 </div>

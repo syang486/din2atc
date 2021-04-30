@@ -13,7 +13,7 @@ body {
 
 }  
 .left-nav .logo_description{
-    font-family:  'Montserrat', sans-serif;
+font-family: 'Comfortaa', sans-serif;
     font-size: 18px;
     margin-left: 20%;
     margin-right: 3%;
@@ -21,6 +21,7 @@ body {
     padding: 8px 2px;
     text-decoration: none;  
     margin-bottom: 2%;
+
 }
 
 .left-nav .nav{
@@ -94,4 +95,9 @@ body {
 .hide span {
   transform: translateY(100%);
   display: inline-block;
+}
+
+#underconstruction{
+  float:right;
+ 
 }

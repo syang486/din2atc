@@ -6,7 +6,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     resize: vertical;
-    font-family: 'Montserrat', sans-serif;
+    font-family:  'Raleway', sans-serif;
   }
   
   label {
@@ -43,10 +43,11 @@
   }
   
   .col-25 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Raleway', sans-serif;
     float: left;
     width: 25%;
     margin-top: 6px;
+    font-size: 20px;
   }
   
   .col-75 {
@@ -74,7 +75,7 @@
   body {
     margin:0;
     padding:0;
-    font-family: 'Spartan', sans-serif;
+    font-family:  'Raleway', sans-serif;
     
   }
   

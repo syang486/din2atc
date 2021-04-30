@@ -16,6 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@100&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"
@@ -48,9 +49,9 @@
 
   <div class="right-top-nav">
       <ul class="nav-bar">
-        <li><a id="len1" class="hoverable" href="#Admin-content">Admin</a></li>
-        <li><a id="len2" class="hoverable" href="#User-content">User</a></li>
-        <li><a id="len3" class="hoverable" href="#Forum-content">Forum</a></li>
+        <li><a id="len1" class="hoverable" href="#Admin-content"> User</a></li>
+        <li><a id="len2" class="hoverable" href="#User-content">Update Request</a></li>
+        <li><a id="len3" class="hoverable" href="#Forum-content">Community</a></li>
       </ul>
   </div>
   <div style="margin-left:450px;">
@@ -62,12 +63,14 @@
         <p>Send your request.</p> 
         <p>We will reach out to you soon!</p>
         <p>Thank you for your outstanding contribution to the website!</p>
-        
+        <br><br><br><br><br><br><br><br><br>
+        <p style="font-family:'Comfortaa', sans-serif;font-size: 5px;color:gray;margin-top: 30%;">This website is created primarily for Canadian researchers, health professionals and students to aid in conversion of Drug Identification Numbers (DIN) to Anatomical Therapeutic Chemical classification codes (ATC) and vice versa.</p>
    </div>
+   
 
 
    <div class="body-content" id="User-content">
-         <p>User Update Info Page</p>
+         <p style="font-size: 20px;">User Update Info Page</p>
          <form method="post" action="{{url_for('userUpdate')}}" method = "post">
     <div class="row">
       <div class="col-25">
@@ -109,12 +112,18 @@
       <input type="submit" value="Send">
     </div>
   </form>
+
+        <p style="font-family:'Comfortaa', sans-serif;font-size: 5px;color:gray;margin-top: 30%;">This website is created primarily for Canadian researchers, health professionals and students to aid in conversion of Drug Identification Numbers (DIN) to Anatomical Therapeutic Chemical classification codes (ATC) and vice versa.</p>
    </div>
 
    <div class="body-content" id="Forum-content">
-      <p>All posts about latest news.</p>
+    <img id="underconstruction"src="../static/images/underconstruction.jpg" alt="update">
       <p>All discussions and activities.</p>
+      <p>Coming soon.</p>
+      <br><br><br><br><br><br><br><br><br>
+        <p style="font-family:'Comfortaa', sans-serif;font-size: 5px;color:gray;margin-top: 30%;">This website is created primarily for Canadian researchers, health professionals and students to aid in conversion of Drug Identification Numbers (DIN) to Anatomical Therapeutic Chemical classification codes (ATC) and vice versa.</p>
    </div>
+   
   </div>
 </div>
 </body>

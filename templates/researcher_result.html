@@ -7,35 +7,35 @@
 </head>
 <body>
 <div id="resultpage">
-    <div id="resultcontainer">
-        <h1>Converse Result:</h1>
-        <ol>
-        {% if message %}
-        <p class="message">{{ message | safe }}</p>
-        {% endif %}
-        <br>
-        {% if results %}
-            {% for result in results%}
+<div id="resultcontainer">
+    <h1>Converse Result:</h1>
+    <ol>
+    {% if message %}
+      <p class="message">{{ message | safe }}</p>
+    {% endif %}
+    <br>
+    {% if results %}
+        {% for result in results%}
+            <li>
+            <p>Drug Name: {{result[1]}}</p>
+            <p>DIN Code: {{result[2]}}</p>
+            <p>ATC Code: {{result[3]}}</p>
+            <p>Ingredient: </p>
+            <ol>
+            {% for result_ingred in results_ingred%}
+                {% if result[0] == result_ingred[0]%}
                 <li>
-                <p>Drug Name: {{result[1]}}</p>
-                <p>DIN Code: {{result[2]}}</p>
-                <p>ATC Code: {{result[3]}}</p>
-                <p>Ingredient: </p>
-                <ol>
-                {% for result_ingred in results_ingred%}
-                    {% if result[0] == result_ingred[0]%}
-                    <li>
-                    <p>{{result_ingred[1]}}&nbsp&nbsp&nbsp{{result_ingred[2]}}</p>
-                    </li>
-                    {% endif %}
-                {% endfor %}
-                <br>
-                </ol>
+                <p>{{result_ingred[1]}}&nbsp&nbsp&nbsp{{result_ingred[2]}}</p>
                 </li>
+                {% endif %}
             {% endfor %}
-        {% endif %}
-        </ol>
-    </div>
+            <br>
+            </ol>
+            </li>
+        {% endfor %}
+    {% endif %}
+    </ol>
+</div>
     <div id="result-img">
         <img src="../static/images/reuslt.jpg">
     </div>

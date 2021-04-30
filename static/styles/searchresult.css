@@ -34,6 +34,7 @@ body{
     display: flex;
     flex-direction: row;
 }
+
 #result-img{
     margin-left: auto;
     margin-top: auto;

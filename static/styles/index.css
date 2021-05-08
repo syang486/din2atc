@@ -1,103 +1,102 @@
 body {
-    margin: 0;
-  }
+  margin: 0;
+}
 
 .left-nav .logo1{
-    font-family:  'Montserrat', sans-serif;
-    font-size: 60px;
-    margin-top: 5%;
-    color: rgba(83, 82, 82, 0.872);
-    padding: 8px 16px;
-    text-decoration: none;
+  font-family:  'Montserrat', sans-serif;
+  font-size: 60px;
+  margin-top: 5%;
+  color: rgba(83, 82, 82, 0.872);
+  padding: 8px 16px;
+  text-decoration: none;
 
 
 }  
 .left-nav .logo_description{
 font-family: 'Comfortaa', sans-serif;
-    font-size: 18px;
-    margin-left: 20%;
-    margin-right: 3%;
-    color: black;
-    padding: 8px 2px;
-    text-decoration: none;  
-    margin-bottom: 2%;
+  font-size: 18px;
+  margin-left: 20%;
+  margin-right: 3%;
+  color: black;
+  padding: 8px 2px;
+  text-decoration: none;  
+  margin-bottom: 2%;
 
 }
 
 .left-nav .nav{
-    list-style-type: none;
-    margin:0;
-    padding: 0;
-    width: 30%;
-    background-color: #f1f1f1;
-    position: fixed;
-    height: 100%;
-    overflow: auto;
-  }
-  
-.left-nav li a {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 50px;
-    display: block;
-    height: 77px;
-    color: rgba(120, 178, 216, 0.877);
-    padding: 8px 16px;
-    text-decoration: none;
-  }
-  
-.left-nav li a.active {
-    background-color:rgba(102, 155, 199, 0.849);
-    color: white;
-    margin-left: 3%;
-    padding: 5px 10px;
-    transition: 0.3s;
+  list-style-type: none;
+  margin:0;
+  padding: 0;
+  width: 30%;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
 
-  }
+.left-nav li a {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 50px;
+  display: block;
+  height: 77px;
+  color: rgba(120, 178, 216, 0.877);
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.left-nav li a.active {
+  background-color:rgba(102, 155, 199, 0.849);
+  color: white;
+  margin-left: 3%;
+  padding: 5px 10px;
+  transition: 0.3s;
+
+}
 
 .left-nav a:hover:not(.active) {
-    background-color: rgb(184, 180, 180);
-    color: white;
-  }
+  background-color: rgb(184, 180, 180);
+  color: white;
+}
 
 .slider {
-    background:rgb(102, 155, 199);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transform: translateY(100%);
-  }
-  
-.intro {
-    background: rgb(246, 250, 249);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  background:rgb(102, 155, 199);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateY(100%);
+}
 
-  .intro-text {
-    color: rgba(102, 155, 199, 0.849);
-    font-family: "Heebo", sans-serif;
-    font-size: 2rem;
-  }
+.intro {
+  background: rgb(246, 250, 249);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.intro-text {
+  color: rgba(102, 155, 199, 0.849);
+  font-family: "Heebo", sans-serif;
+  font-size: 2rem;
+}
 
 .hide {
-  background: rgb(250, 248, 248);
-  overflow: hidden;
+background: rgb(250, 248, 248);
+overflow: hidden;
 }
 
 .hide span {
-  transform: translateY(100%);
-  display: inline-block;
+transform: translateY(100%);
+display: inline-block;
 }
 
 #underconstruction{
-  float:right;
- 
+float:right;
 }

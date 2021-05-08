@@ -1,3 +1,9 @@
+#---------------------------------------#
+#File Name: app.py
+#Author: Shulan Yang, Jia Wang, Shuming Zhang
+#Description: This file is used for connection between website pages, 
+#retrieve and update data from database.
+#---------------------------------------#
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.automap import automap_base
@@ -6,7 +12,10 @@ import re
 
 app = Flask(__name__)
 
-ENV = 'dev'
+#Set up the database
+#If use the local database, change the value of variable ENV to dev.
+#If run the online database, change the value of variable ENV to prod.
+ENV = 'prod'
 
 if ENV == 'dev':
     app.debug = True
@@ -16,9 +25,9 @@ else:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://kwccbaggatldge:00f9e126c274a545c81945fa20dcc0b7a0cfd13e7c184cd58dec1b732434294f@ec2-107-22-83-3.compute-1.amazonaws.com:5432/dboour5eut0e35'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 db = SQLAlchemy(app)
 
+#Reflect the existing tables from the database
 Base = automap_base()
 Base.prepare(db.engine, reflect=True)
 Drug = Base.classes.drug
@@ -31,26 +40,36 @@ Pstatus = Base.classes.pstatus
 Schedule = Base.classes.schedule
 Ther = Base.classes.ther
 
+#Link to the beginning page
 @app.route('/')
 def index():
     return render_template('index.html')
 
+#Link to the home page
 @app.route('/home')
 def home():
     return render_template('home.html')
 
+#Link to the search page
 @app.route('/search')
 def search():
     return render_template('search.html')
 
+#Link to the update page
 @app.route('/update')
 def update():
     return render_template('update.html')
 
+#Link to the contact page
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
 
+#----------------------------#
+#Receive the din code or atc code from researcher search page
+#Find possible drug name, din code, and atc code in the database
+#Return the drug name, din code, and atc code to researcher result page
+#----------------------------#
 @app.route('/researcher', methods=['GET', 'POST'])
 def researcher():
     if request.method == 'POST':
@@ -86,6 +105,11 @@ def researcher():
             return render_template('researcher_result.html', results = results, results_ingred = results_ingred)
     return render_template('researcher_result.html')
 
+#----------------------------#
+#Receive drug name, the din code, or atc code from pharmacist search page
+#Find possible drug name, din code, atc code, company name, pharmceutical form, product information, class, schedule, and ingredient in the database
+#Return those variable to pharmacist result page
+#----------------------------#
 @app.route('/pharmacist', methods=['GET', 'POST'])
 def pharmacist():
     if request.method == 'POST':
@@ -135,6 +159,11 @@ def pharmacist():
             return render_template('pharmacist_result.html', results = results, results_ingred = results_ingred)             
     return render_template('pharmacist_result.html')
 
+#----------------------------#
+#Receive drug name from patient search page
+#Find possible drug name, company name, pharmceutical form, schedule and ingredient in the database
+#Return those variable to patient result page
+#----------------------------#
 @app.route('/patient', methods=['GET', 'POST'])
 def patient():
     if request.method == 'POST':
@@ -151,7 +180,11 @@ def patient():
             return render_template('patient_result.html', results = results, results_ingred = results_ingred)
     return render_template('patient_result.html')
 
-
+#----------------------------#
+#Receive user email address, drug code, code type and content from user update info form in the update page
+#Send those information to the admin
+#Return the message to the user success page
+#----------------------------#
 @app.route('/userUpdate', methods=['GET', 'POST'])
 def userUpdate():
     message = ""
@@ -180,12 +213,10 @@ def userUpdate():
                 elif drugcode == '' and content != '':
                     message = "⚠️Please fill out Drug Code!"
                 else:
-                    admin_email = "pharmasearchuwo@gmail.com"
-                    admin_email_pass = "PharmaSearch2021"
-                    #new_msg = """Subject: Update Info From User: 
-                    #yes
-                    #"""
-                    
+                    #Set up the admin email and admin email address
+                    #Send those information to admin's email
+                    admin_email = "din2atc@gmail.com"
+                    admin_email_pass = "din2atc2021@"               
                     try:
                         email_p ="Title:Update Info From User: "
                         newdetail="You have received a new message. Here are the details:"
